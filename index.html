@@ -3,113 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curiosidades sobre Sertanejo</title>
-    <style>
-        body {
-            background-color: #2C003E;
-            color: #E5E5E5;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-        h1, h2 {
-            color: #FFC857;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        p {
-            color: #E5E5E5;
-            margin: 10px 0;
-            font-size: 18px;
-        }
-        .highlight {
-            color: #FF665A;
-            font-weight: bold;
-        }
-        .input-container {
-            background-color: #420046;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            margin: 20px 0;
-            width: 100%;
-            max-width: 600px;
-        }
-        input[type="text"], textarea {
-            width: calc(100% - 120px);
-            padding: 10px;
-            margin-right: 10px;
-            border-radius: 5px;
-            border: 2px solid #FFC857;
-            font-size: 16px;
-            background-color: #FFF;
-            color: #333;
-            outline: none;
-        }
-        input[type="text"]:focus, textarea:focus {
-            border-color: #FF665A;
-        }
-        input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #FFC857;
-            color: #420046;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        input[type="submit"]:hover {
-            background-color: #FF665A;
-            color: #FFF;
-        }
-        .output {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #FFC857;
-            font-weight: bold;
-        }
-        textarea {
-            width: calc(100% - 120px);
-            padding: 10px;
-            margin-right: 10px;
-            border-radius: 5px;
-            border: 2px solid #FFC857;
-            font-size: 16px;
-            background-color: #FFF;
-            color: #333;
-            outline: none;
-        }
-        textarea:focus {
-            border-color: #FF665A;
-        }
-    </style>
+    <title>Curiosidades sobre Estilo de Música</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h1>Você sabia?</h1>
-    <p><span class="highlight">Jorge & Mateus</span> - Um dos duos mais famosos do sertanejo universitário.</p>
-    <p>O som inconfundível de Jorge & Mateus ajudou a moldar o gênero, que mescla elementos de pop e música eletrônica ao sertanejo tradicional.</p>
+    <h1>Curiosidades sobre Música</h1>
 
-    <p><span class="highlight">Marília Mendonça</span> - A Rainha da Sofrência.</p>
-    <p>Marília Mendonça foi uma das maiores representantes do sertanejo, sendo um ícone do "sertanejo sofrência", com músicas que abordam relacionamentos e emoções profundas.</p>
+    <div class="carousel">
+        <div class="carousel-container" id="carousel-container">
+            <div class="carousel-slide">Você sabia? O Pop se originou nos anos 50, misturando vários gêneros como o rock e o blues.</div>
+            <div class="carousel-slide">Curiosidade: Michael Jackson é conhecido como o "Rei do Pop", com recordes de vendas no mundo todo.</div>
+            <div class="carousel-slide">Fato Pop: Madonna, chamada de "Rainha do Pop", é a artista feminina mais bem-sucedida da história da música.</div>
+            <div class="carousel-slide">O grupo de K-Pop BTS quebrou diversos recordes mundiais e trouxe o pop coreano para o mainstream.</div>
+        </div>
+        <div class="carousel-controls">
+            <button onclick="moverSlide(-1)">&#10094;</button>
+            <button onclick="moverSlide(1)">&#10095;</button>
+        </div>
+    </div>
 
     <div class="input-container">
-        <h2>Qual é a sua música sertaneja favorita?</h2>
-        <form onsubmit="exibirMusicaFavorita(event)">
+        <h2>Qual é a sua música e artista favoritos?</h2>
+        <form onsubmit="buscarMusicaFavorita(event)">
             <input type="text" id="musica-favorita" placeholder="Digite sua música favorita">
-            <input type="submit" value="Enviar">
+            <input type="submit" value="Buscar">
         </form>
         <div class="output" id="resultado-musica"></div>
     </div>
 
     <div class="input-container">
-        <h2>O que você sabe que não sabemos ainda?</h2>
-        <p>Sobre artistas sertanejos, curiosidades, etc.</p>
+        <h2>Escreva aqui uma curiosidade sobre sua música preferida que a gente ainda não sabe!</h2>
+        <p>Ou sobre o cantor, a banda, o que você achar legal.</p>
         <form onsubmit="exibirCuriosidade(event)">
             <textarea id="curiosidade" rows="4" placeholder="Escreva aqui"></textarea>
             <input type="submit" value="Enviar">
@@ -117,34 +42,7 @@
         <div class="output" id="resultado-curiosidade"></div>
     </div>
 
-    <div class="input-container">
-        <h2>Curiosidade sobre Sertanejo</h2>
-        <p><span class="highlight">Você sabia?</span> O Sertanejo Universitário conquistou o público jovem com influências de pop e música eletrônica, e artistas como <span class="highlight">Jorge & Mateus</span> e <span class="highlight">Marília Mendonça</span> são alguns dos responsáveis pelo sucesso do gênero!</p>
-    </div>
-
-    <script>
-        function exibirMusicaFavorita(event) {
-            event.preventDefault();
-            var musica = document.getElementById('musica-favorita').value;
-            if (musica.trim() !== "") {
-                document.getElementById('resultado-musica').innerText = 'Sua música sertaneja favorita é: ' + musica;
-                document.getElementById('musica-favorita').value = '';
-            } else {
-                alert("Por favor, insira uma música!");
-            }
-        }
-
-        function exibirCuriosidade(event) {
-            event.preventDefault();
-            var curiosidade = document.getElementById('curiosidade').value;
-            if (curiosidade.trim() !== "") {
-                document.getElementById('resultado-curiosidade').innerText = 'Você compartilhou: ' + curiosidade;
-                document.getElementById('curiosidade').value = '';
-            } else {
-                alert("Por favor, insira uma curiosidade!");
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
